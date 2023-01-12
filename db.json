@@ -1,1 +1,28 @@
-{"products" : []}
+{
+  "products": [
+    {
+      "name": "gfhjk",
+      "descr": "fghjkl",
+      "price": 2323,
+      "picture": "hjk",
+      "type": "hjk",
+      "id": 1
+    },
+    {
+      "name": "MEDER",
+      "descr": "lll",
+      "price": 1111,
+      "picture": "[il",
+      "type": "human",
+      "id": 2
+    },
+    {
+      "name": "AAA",
+      "descr": "some descr",
+      "price": 1000000000000000000,
+      "picture": "https://static.independent.co.uk/2021/12/07/10/PRI213893584.jpg?quality=75&width=982&height=726&auto=webp",
+      "type": "STAR",
+      "id": 3
+    }
+  ]
+}
