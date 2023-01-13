@@ -23,6 +23,22 @@
       "picture": "https://static.independent.co.uk/2021/12/07/10/PRI213893584.jpg?quality=75&width=982&height=726&auto=webp",
       "type": "STAR",
       "id": 3
+    },
+    {
+      "name": "Антон ",
+      "descr": "asdasd",
+      "price": 2222,
+      "picture": "https://static.independent.co.uk/2021/12/07/10/PRI213893584.jpg?quality=75&width=982&height=726&auto=webp",
+      "type": "aaa",
+      "id": 4
+    },
+    {
+      "name": "AAA",
+      "descr": "some descr",
+      "price": 2222,
+      "picture": "https://static.independent.co.uk/2021/12/07/10/PRI213893584.jpg?quality=75&width=982&height=726&auto=webp",
+      "type": "Phone",
+      "id": 5
     }
   ]
 }

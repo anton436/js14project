@@ -7,10 +7,13 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 export default function ProductCard({ item }) {
+
+
+  
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: "20%", margin: '1rem' }}>
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ height: 200 }}
         image={item.picture}
         title='green iguana'
       />
