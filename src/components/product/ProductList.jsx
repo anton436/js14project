@@ -10,7 +10,9 @@ const ProductList = () => {
   }, []);
 
   return (
-    <div style={{display:'flex', justifyContent:'center', flexWrap:'wrap'}}>
+    <div
+      style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}
+    >
       {products.map((item) => (
         <ProductCard key={item.id} item={item} />
       ))}
