@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "name": "gfhjk",
+      "descr": "fghjkl",
+      "price": 2323,
+      "picture": "hjk",
+      "type": "hjk",
+      "id": 1
+    },
+    {
+      "name": "IMANGAZY",
+      "descr": "lll",
+      "price": 1111,
+      "picture": "[il",
+      "type": "human",
+      "id": 2
+    },
+    {
+      "name": "Антон ",
+      "descr": "asdasd",
+      "price": 2222,
+      "picture": "https://static.independent.co.uk/2021/12/07/10/PRI213893584.jpg?quality=75&width=982&height=726&auto=webp",
+      "type": "aaa",
+      "id": 4
+    }
+  ]
+}
