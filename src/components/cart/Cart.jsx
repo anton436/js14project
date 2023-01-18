@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useCart } from "../../contexts/CartContextProvider";
+import { Button } from "@mui/material";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -21,7 +22,9 @@ const rows = [
 ];
 
 export default function Cart() {
-  const { getCart } = useCart();
+  const { getCart, cart } = useCart();
+
+  console.log(cart);
 
   React.useEffect(() => {
     getCart();
@@ -43,22 +46,31 @@ export default function Cart() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {cart?.products.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.item.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                <img src={row.item.picture} alt="" width="70" height="70" />
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.item.name}</TableCell>
+              <TableCell align="right">{row.item.type}</TableCell>
+              <TableCell align="right">{row.item.descr}</TableCell>
+              <TableCell align="right">{row.item.price}</TableCell>
+              <TableCell align="right">
+                <input type="number" value={row.count} />
+              </TableCell>
+              <TableCell align="right">{row.subPrice}</TableCell>
+              <TableCell align="right">
+                <button>DELETE</button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+
+      <Button> BUY NOW FOR {cart?.totalPrice} $</Button>
     </TableContainer>
   );
 }

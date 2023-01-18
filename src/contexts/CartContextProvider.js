@@ -87,7 +87,12 @@ const CartContextProvider = ({ children }) => {
     }
   };
 
-  const values = { getCart, addProductToCart, checkProductInCart };
+  const values = {
+    getCart,
+    addProductToCart,
+    checkProductInCart,
+    cart: state.cart,
+  };
   return <cartContext.Provider value={values}>{children}</cartContext.Provider>;
 };
 

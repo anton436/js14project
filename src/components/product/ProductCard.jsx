@@ -17,7 +17,7 @@ export default function ProductCard({ item }) {
 
   const navigate = useNavigate();
   return (
-    <Card sx={{ width: "20%", margin: "1rem" }}>
+    <Card sx={{ width: "25%", margin: "1rem" }}>
       <CardMedia
         sx={{ height: 200 }}
         image={item.picture}
@@ -48,7 +48,7 @@ export default function ProductCard({ item }) {
 
         <IconButton onClick={() => addProductToCart(item)}>
           <ShoppingCartIcon
-            color={checkProductInCart(item.id) ? "green" : ""}
+            color={checkProductInCart(item.id) ? "primary" : ""}
           />
         </IconButton>
       </CardActions>
