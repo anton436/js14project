@@ -1,12 +1,16 @@
-import React, { createContext, useContext, useReducer } from "react";
-import { CART } from "../helpers/consts";
-import { calcTotalPrice, getCountProductsInCart } from "../helpers/functions";
+import React, { createContext, useContext, useReducer } from 'react';
+import { CART } from '../helpers/consts';
+import {
+  calcSubPrice,
+  calcTotalPrice,
+  getCountProductsInCart,
+} from '../helpers/functions';
 
 export const cartContext = createContext();
 export const useCart = () => useContext(cartContext);
 
 const INIT_STATE = {
-  cart: JSON.parse(localStorage.getItem("cart")),
+  cart: JSON.parse(localStorage.getItem('cart')),
   cartLength: getCountProductsInCart(),
 };
 
@@ -27,11 +31,11 @@ const CartContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
   const getCart = () => {
-    let cart = JSON.parse(localStorage.getItem("cart"));
+    let cart = JSON.parse(localStorage.getItem('cart'));
 
     if (!cart) {
       localStorage.setItem(
-        "cart",
+        'cart',
         JSON.stringify({
           products: [],
           totalPrice: 0,
@@ -47,7 +51,7 @@ const CartContextProvider = ({ children }) => {
   };
 
   const addProductToCart = (product) => {
-    let cart = JSON.parse(localStorage.getItem("cart"));
+    let cart = JSON.parse(localStorage.getItem('cart'));
 
     if (!cart) {
       cart = { products: [], totalPrice: 0 };
@@ -73,13 +77,13 @@ const CartContextProvider = ({ children }) => {
 
     cart.totalPrice = calcTotalPrice(cart.products);
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
 
     dispatch({ type: CART.GET_CART, payload: cart });
   };
 
   const checkProductInCart = (id) => {
-    let cart = JSON.parse(localStorage.getItem("cart"));
+    let cart = JSON.parse(localStorage.getItem('cart'));
 
     if (cart) {
       let newCart = cart.products.filter((elem) => elem.item.id == id);
@@ -87,7 +91,28 @@ const CartContextProvider = ({ children }) => {
     }
   };
 
+  const changeProductCount = (count, id) => {
+    let cart = JSON.parse(localStorage.getItem('cart'));
+
+    cart.products = cart.products.map((product) => {
+      if (product.item.id == id) {
+        product.count = count;
+        product.subPrice = calcSubPrice(product);
+      }
+      return product;
+    });
+    cart.totalPrice = calcTotalPrice(cart.products);
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    dispatch({
+      type: CART.GET_CART,
+      payload: cart,
+    });
+  };
+
   const values = {
+    changeProductCount,
     getCart,
     addProductToCart,
     checkProductInCart,
