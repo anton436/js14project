@@ -30,6 +30,11 @@ export default function Cart() {
     getCart();
   }, []);
 
+  const cartCleaner = () => {
+    localStorage.removeItem('cart');
+    getCart();
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -80,7 +85,7 @@ export default function Cart() {
         </TableBody>
       </Table>
 
-      <Button> BUY NOW FOR {cart?.totalPrice} $</Button>
+      <Button onClick={cartCleaner}> BUY NOW FOR {cart?.totalPrice} $</Button>
     </TableContainer>
   );
 }
