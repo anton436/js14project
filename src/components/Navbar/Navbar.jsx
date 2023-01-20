@@ -18,13 +18,14 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Badge } from '@mui/material';
 import { useCart } from '../../contexts/CartContextProvider';
 import { getCountProductsInCart } from '../../helpers/functions';
+import { ADMIN } from '../../helpers/consts';
 
 const pages = [
   { name: 'Home', link: '/', id: 1 },
   { name: 'Our Partners', link: '/partners', id: 2 },
   { name: 'Products', link: '/products', id: 3 },
   { name: 'AboutUs', link: '/about', id: 4 },
-  { name: 'Admin', link: '/admin', id: 5 },
+  // { name: 'Admin', link: '/admin', id: 5 },
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -44,7 +45,7 @@ function Navbar() {
     setCount(getCountProductsInCart);
   }, [addProductToCart]);
 
-  console.log(email);
+  // console.log(email);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -64,7 +65,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -122,6 +123,16 @@ function Navbar() {
                   </Link>
                 </MenuItem>
               ))}
+
+              {email == ADMIN ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Link to="/admin">
+                    <Typography textAlign="center">ADMIN</Typography>
+                  </Link>
+                </MenuItem>
+              ) : (
+                <></>
+              )}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />

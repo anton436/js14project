@@ -8,13 +8,29 @@ import {
   RadioGroup,
   TextField,
 } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { useProducts } from '../../contexts/ProductContextProvider';
 
 const SideBar = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const { fetchByParams } = useProducts();
+
+  const [search, setSearch] = useState(searchParams.get('q') || '');
+
+  useEffect(() => {
+    setSearchParams({
+      q: search,
+    });
+  }, [search]);
+
   return (
     <Grid item md={3}>
       <Paper elevation={5} sx={{ p: 2 }}>
         <TextField
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           fullWidth
           id="outlined-basic"
           label="search..."
@@ -28,6 +44,7 @@ const SideBar = () => {
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="all"
               name="radio-buttons-group"
+              onChange={(e) => fetchByParams('type', e.target.value)}
             >
               <FormControlLabel value="all" control={<Radio />} label="all" />
               <FormControlLabel
@@ -54,6 +71,7 @@ const SideBar = () => {
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="all"
             name="radio-buttons-group"
+            onChange={(e) => fetchByParams('price_lte', e.target.value)}
           >
             <FormControlLabel value="all" control={<Radio />} label="all" />
 

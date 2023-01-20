@@ -1,15 +1,23 @@
 import { Grid, Pagination } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useProducts } from '../../contexts/ProductContextProvider';
 import ProductCard from './ProductCard';
 
 const ProductList = () => {
   const { getProducts, products } = useProducts();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   useEffect(() => {
     getProducts();
   }, []);
+
+  useEffect(() => {
+    getProducts();
+    setPage(1);
+  }, [searchParams]);
 
   // pagination
 
