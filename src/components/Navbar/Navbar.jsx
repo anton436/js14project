@@ -130,9 +130,7 @@ function Navbar() {
                     <Typography textAlign="center">ADMIN</Typography>
                   </Link>
                 </MenuItem>
-              ) : (
-                <></>
-              )}
+              ) : null}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -165,7 +163,20 @@ function Navbar() {
                 </Button>
               </Link>
             ))}
+
+            {email == ADMIN ? (
+              <Link to="/admin">
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  admin
+                </Button>
+              </Link>
+            ) : null}
           </Box>
+
+          <Typography>{email ? `Hello, ${email}` : 'Login please'}</Typography>
 
           <Link to="/cart">
             <Button>

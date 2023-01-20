@@ -10,14 +10,21 @@ import { useNavigate } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { IconButton } from '@mui/material';
 import { useCart } from '../../contexts/CartContextProvider';
+import { useAuth } from '../../contexts/AuthContextProvider';
+import { ADMIN } from '../../helpers/consts';
 
 export default function ProductCard({ item }) {
   const { deleteProduct } = useProducts();
   const { addProductToCart, checkProductInCart } = useCart();
 
   const navigate = useNavigate();
+
+  const {
+    user: { email },
+  } = useAuth();
+
   return (
-    <Card sx={{ width: '15rem', margin: '1.5rem' }}>
+    <Card sx={{ width: '16rem', margin: '1rem' }}>
       <CardMedia component="img" image={item.picture} title="green iguana" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -34,19 +41,24 @@ export default function ProductCard({ item }) {
         </Typography>
       </CardContent>
       <CardActions sx={{ display: 'flex' }}>
-        <Button size="small" onClick={() => deleteProduct(item.id)}>
-          Delete
-        </Button>
-        <Button size="small">Details</Button>
-        <Button size="small" onClick={() => navigate(`/edit/${item.id}`)}>
-          Edit
-        </Button>
+        {email === ADMIN ? (
+          <>
+            <Button size="small" onClick={() => deleteProduct(item.id)}>
+              Delete
+            </Button>
+            <Button size="small" onClick={() => navigate(`/edit/${item.id}`)}>
+              Edit
+            </Button>
+          </>
+        ) : (
+          <IconButton onClick={() => addProductToCart(item)}>
+            <ShoppingCartIcon
+              color={checkProductInCart(item.id) ? 'primary' : ''}
+            />
+          </IconButton>
+        )}
 
-        <IconButton onClick={() => addProductToCart(item)}>
-          <ShoppingCartIcon
-            color={checkProductInCart(item.id) ? 'primary' : ''}
-          />
-        </IconButton>
+        <Button size="small">Details</Button>
       </CardActions>
     </Card>
   );
